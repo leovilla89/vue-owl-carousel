@@ -165,10 +165,6 @@ export default {
       type: Number,
       default: 200,
     },
-    responsiveBaseElement: {
-        type: String,
-        "default": "window"
-    },
     video: {
       type: Boolean,
       default: false,
@@ -226,6 +222,7 @@ export default {
       prevHandler: 'carousel_prev_' + this.generateUniqueId(),
       elementHandle: 'carousel_' + this.generateUniqueId(),
       nextHandler: 'carousel_next_' + this.generateUniqueId(),
+      owlCmp : null
     };
   },
 
@@ -267,7 +264,6 @@ export default {
       callbacks: this.callbacks,
       responsive: this.responsive,
       responsiveRefreshRate: this.responsiveRefreshRate,
-      responsiveBaseElement: this.responsiveBaseElement,
       video: this.video,
       videoHeight: this.videoHeight,
       videoWidth: this.videoWidth,
@@ -315,12 +311,16 @@ export default {
         }
       });
     }
+    this.owlCmp = owl;
   },
 
   methods: {
     generateUniqueId() {
       return Math.random().toString(36).substring(2, 15);
     },
+    trigger(eventType, param){
+      this.owlCmp.trigger(eventType, param);
+    }
   },
 };
 
