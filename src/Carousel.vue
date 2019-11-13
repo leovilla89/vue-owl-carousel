@@ -226,6 +226,7 @@ export default {
       prevHandler: 'carousel_prev_' + this.generateUniqueId(),
       elementHandle: 'carousel_' + this.generateUniqueId(),
       nextHandler: 'carousel_next_' + this.generateUniqueId(),
+      owlCmp : null
     };
   },
 
@@ -295,7 +296,7 @@ export default {
         this.$emit(eventName, event);
       });
     });
-
+    this.owlCmp = owl;
     if (!this.loop) {
       owl.on('changed.owl.carousel', (event) => {
         // start
@@ -321,6 +322,9 @@ export default {
     generateUniqueId() {
       return Math.random().toString(36).substring(2, 15);
     },
+    trigger(event,params){
+      owl.trigger(event,params);
+    }
   },
 };
 
